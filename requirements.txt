@@ -1,0 +1,14 @@
+# Core (works anywhere, including the dry-run mode — no GPU needed)
+numpy
+pandas
+scikit-learn
+Pillow
+PyYAML
+
+# Needed only for real (non---dry-run) runs — install in Colab / a GPU machine.
+# Intentionally NOT pinned to exact versions here: MegaDescriptor's timm hub
+# integration has moved fast; check https://github.com/WildlifeDatasets/wildlife-tools
+# for the currently-recommended versions before a real run.
+torch
+torchvision
+timm

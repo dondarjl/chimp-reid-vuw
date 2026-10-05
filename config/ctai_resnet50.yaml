@@ -1,0 +1,25 @@
+dataset:
+  name: ctai
+  manifest_path: manifests/ctai_manifest.csv
+  image_root: notebooks/chimpanzee_faces/datasets_cropped_chimpanzee_faces/data_CTai
+  precropped: true
+
+model:
+  name: resnet50
+  type: resnet50
+  img_size: 224
+  device: auto
+
+evaluation:
+  k_neighbors: 1
+  metric: cosine
+  top_k_values: [1, 5]
+
+cache:
+  enabled: true
+  dir: cache/embeddings
+
+output:
+  results_log: results/experiment_log.csv
+  run_name: ctai_resnet50_zeroshot_baseline
+  notes: "Zero-shot ImageNet ResNet-50 baseline, no fine-tuning. Comparison point for MegaDescriptor's wildlife-specific pretraining gain."

@@ -1,0 +1,28 @@
+# Config for the CZoo zero-shot baseline run.
+# To try a different dataset, copy this file and change dataset.* + output.run_name
+# — nothing in pipeline/ or run_pipeline.py needs to change.
+
+dataset:
+  name: czoo
+  manifest_path: manifests/czoo_manifest.csv
+  image_root: notebooks/chimpanzee_faces/datasets_cropped_chimpanzee_faces/data_CZoo
+  precropped: true   # true = PassthroughDetector (image already IS the face)
+
+model:
+  name: hf-hub:BVRA/MegaDescriptor-L-384
+  img_size: 384
+  device: auto   # auto | cuda | cpu
+
+evaluation:
+  k_neighbors: 1
+  metric: cosine
+  top_k_values: [1, 5]
+
+cache:
+  enabled: true
+  dir: cache/embeddings
+
+output:
+  results_log: results/experiment_log.csv
+  run_name: czoo_zeroshot_baseline
+  notes: "Zero-shot MegaDescriptor, no fine-tuning. Freytag et al. 2016 data/splits regenerated via adapters/czoo_to_manifest.py."

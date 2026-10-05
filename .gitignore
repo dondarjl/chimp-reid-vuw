@@ -1,0 +1,22 @@
+# Environment
+venv/
+__pycache__/
+*.pyc
+
+# Generated data — regenerate via adapters/, never commit
+manifests/*.csv
+cache/
+
+# Raw datasets and real zoo photos — large, and potentially sensitive
+notebooks/chimpanzee_faces/
+wellington_data/
+
+# Generated diagnostic output — regenerate via diagnostics/error_analysis.py
+diagnostics/errors/
+
+# Real config with local paths (keep .template tracked, not the real file)
+config/wellington.yaml
+
+# OS/editor noise
+.DS_Store
+Thumbs.dba

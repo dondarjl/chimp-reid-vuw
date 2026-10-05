@@ -1,0 +1,32 @@
+# TEMPLATE for the real Wellington Zoo dataset. Copy to wellington.yaml, then:
+#   1. Run adapters/wellington_to_manifest.py to produce the manifest_path below.
+#   2. Fill in image_root to point at wherever the photos actually live.
+#   3. Set precropped: false IF you keep full enclosure photos with bboxes;
+#      leave it true if you semi-manually crop faces before ingestion
+#      (recommended for the first batch — see report Section 7).
+# Nothing else changes: run_pipeline.py --config config/wellington.yaml just works.
+
+dataset:
+  name: wellington
+  manifest_path: manifests/wellington_manifest.csv
+  image_root: wellington_data          # TODO: point at real photos once collected
+  precropped: true                      # TODO: set to false if using raw enclosure photos + bboxes
+
+model:
+  name: hf-hub:BVRA/MegaDescriptor-L-384
+  img_size: 384
+  device: auto
+
+evaluation:
+  k_neighbors: 1
+  metric: cosine
+  top_k_values: [1, 5]
+
+cache:
+  enabled: true
+  dir: cache/embeddings
+
+output:
+  results_log: results/experiment_log.csv
+  run_name: wellington_zeroshot_baseline   # TODO: rename per experiment as you iterate
+  notes: "TODO: first real Wellington Zoo run."

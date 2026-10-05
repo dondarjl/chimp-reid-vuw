@@ -1,0 +1,30 @@
+# Config for the CTai zero-shot baseline run.
+# Report Section 6: evaluate CZoo and CTai SEPARATELY, don't pool them — CTai
+# is field-quality (Freytag et al.), so this is the more conservative,
+# Wellington-relevant benchmark of the two only in the sense of "worse case";
+# CZoo (controlled zoo enclosure) is expected to be the closer analogue.
+
+dataset:
+  name: ctai
+  manifest_path: manifests/ctai_manifest.csv
+  image_root: notebooks/chimpanzee_faces/datasets_cropped_chimpanzee_faces/data_CTai
+  precropped: true
+
+model:
+  name: hf-hub:BVRA/MegaDescriptor-L-384
+  img_size: 384
+  device: auto
+
+evaluation:
+  k_neighbors: 1
+  metric: cosine
+  top_k_values: [1, 5]
+
+cache:
+  enabled: true
+  dir: cache/embeddings
+
+output:
+  results_log: results/experiment_log.csv
+  run_name: ctai_zeroshot_baseline
+  notes: "Zero-shot MegaDescriptor, no fine-tuning. Field-quality images per Freytag et al. — expect lower accuracy than CZoo."
