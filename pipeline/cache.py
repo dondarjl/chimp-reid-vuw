@@ -6,12 +6,11 @@ MegaDescriptor for every image). Without caching, every re-run of the
 pipeline — e.g. trying a different k in kNN, or re-running after adding five
 new Wellington photos — silently redoes ALL of that GPU work from scratch.
 
-Cache key = hash(filepath + model_name + image_size), so:
+Cache key = hash(filepath), namespaced by directory on (dataset, model_name,
+image_size), so:
+  - Two different datasets that happen to share filepaths (e.g. CTai and
+    CZoo, both Freytag-format) never collide.
   - Two different models never collide in the cache.
-  - Changing IMG_SIZE in config invalidates old entries automatically instead
-    of silently mixing embeddings computed at different resolutions.
-  - Re-running the exact same (image, model, size) combo is a disk read, not
-    a GPU forward pass.
 """
 from __future__ import annotations
 import hashlib

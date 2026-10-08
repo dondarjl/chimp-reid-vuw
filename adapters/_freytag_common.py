@@ -62,3 +62,22 @@ def stratified_split(df: pd.DataFrame, test_fraction: float, seed: int,
         test_idx = group.sample(n=n_test, random_state=seed).index
         df.loc[test_idx, "split"] = "test"
     return df
+
+def parse_freytag_annotations_unfiltered(annotation_path: str) -> pd.DataFrame:
+    """Same as parse_freytag_annotations, but WITHOUT the non-identity label
+    filter — returns the data exactly as Freytag et al. wrote it, "Adult"
+    included as its own label. Exists only for exploratory distribution
+    plots (diagnostics/dataset_distribution.py --raw) that need to show the
+    data before any cleaning decision, including the ones made inside the
+    adapter's own parser.
+    """
+    rows = []
+    with open(annotation_path, "r") as f:
+        for line in f:
+            if not line.strip():
+                continue
+            fields = line.split()
+            filename = fields[1]
+            name = fields[fields.index("Name") + 1]
+            rows.append({"filepath": filename, "identity": name})
+    return pd.DataFrame(rows)
