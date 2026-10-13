@@ -1,0 +1,30 @@
+{
+  "dataset": "ctai",
+  "model": "resnet50_zeroshot",
+  "top1": 0.519438444924406,
+  "top5": 0.8002159827213823,
+  "n_train": 3715,
+  "n_test": 926,
+  "n_identities": 65,
+  "n_test_errors": 445,
+  "hyperparameters": {
+    "manifest": "manifests/ctai_manifest.csv",
+    "dataset": "ctai",
+    "out_dir": "results/resnet50_ft",
+    "image_root": "notebooks/chimpanzee_faces/datasets_cropped_chimpanzee_faces/data_CTai",
+    "col_path": "filepath",
+    "col_id": "identity",
+    "col_split": "split",
+    "epochs": 0,
+    "p": 16,
+    "k": 4,
+    "margin": 0.3,
+    "lr": 0.0001,
+    "weight_decay": 0.0001,
+    "img_size": 224,
+    "seed": 0,
+    "num_workers": 4,
+    "save_ckpt": false
+  },
+  "train_loss_per_epoch": []
+}

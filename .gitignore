@@ -20,3 +20,4 @@ config/wellington.yaml
 # OS/editor noise
 .DS_Store
 Thumbs.dba
+results/resnet50_ft/**/*.pt
